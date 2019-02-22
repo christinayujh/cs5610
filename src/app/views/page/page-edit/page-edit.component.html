@@ -1,0 +1,49 @@
+
+<nav class="navbar navbar-light bg-light fixed-top">
+
+  <div class="container-fluid row">
+
+    <div class="float-left">
+      <a routerLink="/user/{{userId}}/website/{{websiteId}}/page" class="cl-text-black cl-icon-padding">
+          <span class="fas fa-chevron-left">
+          </span>
+      </a>
+      <a class="navbar-brand cl-text-white cl-text-bold" href="#">
+        Edit Page
+      </a>
+    </div>
+
+    <div class="navbar-text float-right">
+      <a routerLink="/user/{{userId}}/website/{{websiteId}}/page" class="cl-icon-padding cl-text-black">
+          <span class="fas fa-check">
+          </span>
+      </a>
+    </div>
+
+  </div>
+</nav>
+
+
+<div class="container">
+  <form (ngSubmit)="delete()">
+    <div class="form-group">
+      <label for="page-name">Name</label>
+      <input [(ngModel)]="page.name" name="name" type="text" class="form-control" id="page-name" placeholder="Page Name">
+    </div>
+    <div class="form-group">
+      <label for="page-title">Title</label>
+      <input [(ngModel)]="page.description" name="description" type="text" class="form-control" id="page-title" placeholder="Page Title">
+    </div>
+  </form>
+  <a class="btn btn-danger  btn-block" routerLink="/user/{{userId}}/website/{{websiteId}}/page" >Delete</a>
+</div>
+
+<nav class="navbar navbar-light bg-light fixed-bottom">
+  <div class="container-fluid row">
+    <div class="pull-right">
+      <a routerLink="/user/{{userId}}" class="cl-icon-padding">
+        <span class="fas fa-user"></span>
+      </a>
+    </div>
+  </div>
+</nav>

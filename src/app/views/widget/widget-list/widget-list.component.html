@@ -1,0 +1,72 @@
+<body>
+<nav class="navbar navbar-light bg-light fixed-top">
+  <div class="container-fluid row">
+
+    <div class="navbar-text float-left">
+      <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}" class="cl-text-black cl-icon-padding">
+          <span class="fas fa-chevron-left">
+          </span>
+      </a>
+      <a class="navbar-brand cl-text-white cl-text-bold" href="#">
+        Widgets
+      </a>
+    </div>
+    <div class="navbar-text float-right">
+      <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/new" class="cl-icon-padding cl-text-black">
+          <span class="fas fa-plus">
+          </span>
+      </a>
+    </div>
+
+  </div>
+</nav>
+
+
+<div class="container cl-container-padding" *ngFor="let widget of widgets">
+  <div [ngSwitch]="widget['widgetType']">
+
+    <div *ngSwitchCase="'HEADING'">
+      <a routerLink="/{{widget['link']}}"><span class="fas fa-cog float-right"></span></a>
+      <h1 >"{{widget['text']}}"</h1>
+    </div>
+
+    <div *ngSwitchCase="'YOUTUBE'">
+      <a routerLink="/{{widget['link']}}"><span class="fas fa-cog float-right"></span></a>
+      <iframe width="480" height="315" [src]="byPass(widget['url'])"></iframe>
+    </div>
+
+    <div *ngSwitchCase="'IMAGE'">
+      <a routerLink="/{{widget['link']}}"><span class="fas fa-cog float-right"></span></a>
+      <img class="img-responsive img-rounded cl-widget-images" src="{{widget['url']}}">
+    </div>
+
+  </div>
+
+</div>
+
+
+<nav class="navbar navbar-light bg-light fixed-bottom">
+  <div class="container-fluid row">
+    <div class="float-right">
+
+      <a routerLink="/user/{{userId}}" class="cl-icon-padding">
+        <span class="fas fa-user"></span>
+      </a>
+
+    </div>
+
+    <div class="float-left">
+      <a href="#" class="cl-icon-padding">
+        <span class="fas fa-eye-open"></span>
+      </a>
+      <a href="#" class="cl-icon-padding">
+        <span class="fas fa-play"></span>
+      </a>
+
+    </div>
+  </div>
+</nav>
+
+
+
+</body>

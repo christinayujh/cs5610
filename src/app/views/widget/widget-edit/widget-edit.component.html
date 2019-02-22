@@ -1,0 +1,54 @@
+<body>
+
+<nav class="navbar navbar-light bg-light fixed-top">
+  <div class="container-fluid row">
+
+    <div class="navbar-text float-left">
+      <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget" class="cl-text-black cl-icon-padding">
+          <span class="fas fa-chevron-left">
+          </span>
+      </a>
+      <a class="navbar-brand cl-text-white cl-text-bold" href="#">
+        Widget Edit
+      </a>
+    </div>
+    <div class="navbar-text pull-right">
+      <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget" class="cl-icon-padding cl-text-black">
+          <span class="fas fa-chevron-left">
+          </span>
+      </a>
+    </div>
+
+  </div>
+</nav>
+
+<div [ngSwitch]="widget['widgetType']">
+
+  <div *ngSwitchCase="'HEADING'">
+    <app-widget-header></app-widget-header>
+  </div>
+
+  <div *ngSwitchCase="'YOUTUBE'">
+    <app-widget-youtube></app-widget-youtube>
+  </div>
+
+  <div *ngSwitchCase="'IMAGE'">
+    <app-widget-image></app-widget-image>
+  </div>
+
+</div>
+
+
+<nav class="navbar navbar-light bg-light fixed-bottom">
+  <div class="container-fluid row">
+    <div class="float-right">
+
+      <a routerLink="/user/{{userId}}" class="cl-icon-padding">
+        <span class="fas fa-user"></span>
+      </a>
+
+    </div>
+  </div>
+</nav>
+
+</body>

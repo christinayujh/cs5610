@@ -1,0 +1,43 @@
+
+<nav class="navbar navbar-light bg-light fixed-top">
+  <div class="container-fluid row">
+
+    <div class="pull-left">
+      <a routerLink="/user/{{userId}}/website" class="cl-text-black cl-icon-padding">
+          <span class="fas fa-chevron-left">
+          </span>
+      </a>
+      <a class="navbar-brand cl-text-white cl-text-bold" href="#">
+        Pages
+      </a>
+    </div>
+    <div class="navbar-text pull-right">
+      <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/new" class="cl-icon-padding cl-text-black">
+          <span class="fas fa-plus">
+          </span>
+      </a>
+    </div>
+
+  </div>
+</nav>
+
+
+<div class="container-fluid cl-container-padding">
+  <ul class="list-group cl-list-group-borderless">
+    <li class="list-group-item cl-list-item-borderless" *ngFor="let page of pages">
+
+      <a routerLink="/{{page['url']}}"><span class="fas fa-cog float-right"></span></a>
+      <a routerLink="/{{page['url']}}/widget">{{page['name']}}</a>
+    </li>
+  </ul>
+</div>
+
+<nav class="navbar navbar-light bg-light fixed-bottom">
+  <div class="container-fluid row">
+    <div class="float-right navbar-text">
+      <a routerLink="/user/{{userId}}" class="cl-icon-padding">
+        <span class="fas fa-user"></span>
+      </a>
+    </div>
+  </div>
+</nav>
