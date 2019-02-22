@@ -3,6 +3,22 @@ import {NgForm} from '@angular/forms';
 import {WebsiteService} from '../../../services/website.service.client';
 import {ActivatedRoute} from '@angular/router';
 
+export class Website {
+  _id: String;
+  name: String;
+  developerId: String;
+  description: String;
+
+  constructor(_id, name, developerId, description) {
+    this._id = _id;
+    this.name = name;
+    this.developerId = developerId;
+    this.description = description;
+  }
+
+
+}
+
 @Component({
   selector: 'app-website-edit',
   templateUrl: './website-edit.component.html',
@@ -13,7 +29,7 @@ export class WebsiteEditComponent implements OnInit {
 
   userId: string;
   websiteId: string;
-  website = {};
+  website: Website;
   websites = [{}];
 
 
@@ -32,11 +48,8 @@ export class WebsiteEditComponent implements OnInit {
     }
   }
 
-  update() {
-    this.website['name'] = this.loginForm.value.name;
-    this.website['description'] = this.loginForm.value.description;
-
-    this.websiteService.updateWebsite(this.userId, this.website);
+  UpdateWebsite() {
+    this.websiteService.updateWebsite(this.websiteId, this.website);
   }
 
   delete() {

@@ -4,7 +4,7 @@
     <div class="col-sm-6">
       <div class="container-fluid d-none d-sm-block">
         <div class="float-left">
-          <a href="website-list.html" class="navbar-text navbar-link cl-text-white">
+          <a routerLink="/user/{{userId}}/website" class="navbar-text navbar-link cl-text-white">
             <span class="fas fa-chevron-left"></span>
           </a>
           <a class="cl-text-white navbar-brand cl-text-bold" href="#">
@@ -22,7 +22,7 @@
         <a class="cl-text-white navbar-brand cl-text-bold" href="#">
           Edit Webite
         </a>
-        <a href="website-list.html" class="navbar-link navbar-text float-right cl-text-white cl-icon-padding">
+        <a (click)="UpdateWebsite()" routerLink="/user/{{userId}}/website" class="navbar-link navbar-text float-right cl-text-white cl-icon-padding">
           <span class="fas fa-check"></span>
         </a>
       </div>
@@ -45,15 +45,15 @@
 
       <div class="form-group">
         <label for="website-name">Name</label>
-        <input id="website-name" ng-model="myName" type="text" name="name" placeholder="{{website['name']}}" class="form-control" ngModel required #name="ngModel">
+        <input id="website-name" [(ngModel)]="website.name" type="text" name="name" placeholder="{{website.name}}" class="form-control" >
       </div>
       <div class="form-group">
         <label for="website-description">Description</label>
-        <textarea id="website-description" ng-model="description" type="description" name="description" class="form-control" rows="5" placeholder="{{website['description']}}" class="form-control" ngModel required #description="ngModel"></textarea>
+        <textarea id="website-description" [(ngModel)]="website.description" type="text" name="description" class="form-control" rows="5" placeholder="{{website.description}}" class="form-control" ></textarea>
       </div>
 
       <div class="form-group">
-        <a class="btn btn-danger  btn-block" type="submit" >Delete</a>
+        <a class="btn btn-danger  btn-block" (click)="delete()" routerLink="/user/{{userId}}/website" >Delete</a>
       </div>
     </form>
   </div>

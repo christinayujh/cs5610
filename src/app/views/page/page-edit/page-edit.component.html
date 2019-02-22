@@ -14,7 +14,7 @@
     </div>
 
     <div class="navbar-text float-right">
-      <a routerLink="/user/{{userId}}/website/{{websiteId}}/page" class="cl-icon-padding cl-text-black">
+      <a (click)="UpdatePage()" routerLink="/user/{{userId}}/website/{{websiteId}}/page" class="cl-icon-padding cl-text-black">
           <span class="fas fa-check">
           </span>
       </a>
@@ -35,7 +35,7 @@
       <input [(ngModel)]="page.description" name="description" type="text" class="form-control" id="page-title" placeholder="Page Title">
     </div>
   </form>
-  <a class="btn btn-danger  btn-block" routerLink="/user/{{userId}}/website/{{websiteId}}/page" >Delete</a>
+  <a class="btn btn-danger  btn-block" (click)="delete()" routerLink="/user/{{userId}}/website/{{websiteId}}/page" >Delete</a>
 </div>
 
 <nav class="navbar navbar-light bg-light fixed-bottom">
