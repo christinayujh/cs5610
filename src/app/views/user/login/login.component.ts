@@ -3,7 +3,6 @@ import {Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import {ViewChild} from '@angular/core';
 import {UserService} from '../../../services/user.service.client';
-import {User} from '../profile/profile.component';
 
 @Component({
   selector: 'app-login',
@@ -32,16 +31,15 @@ export class LoginComponent implements OnInit {
     console.log(this.username);
     console.log(this.password);
 
-    let user;
-    user = this.userService.findUserByUsername(this.username);
-    if (user == null ||  user.password !== this.password)  {
-      this.errorFlag = true;
-    } else {
-      this.router.navigate(['/user', user._id]);
-    }
+    this.userService.findUserByCredential(this.username, this.password).subscribe(
+      (data: any) => {
+        this.errorFlag = false;
+        this.router.navigate(['/user/' + data._id]);
+        },
+      (error: any) => { this.errorFlag = true; }
+    );
   }
 
   ngOnInit() {
-    console.log(this.userService.users);
   }
 }

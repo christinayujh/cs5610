@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {WebsiteService} from '../../../services/website.service.client';
 import {ActivatedRoute} from '@angular/router';
 import {NgForm} from '@angular/forms';
+import {Website} from '../../../models/website.model.client';
 
 @Component({
   selector: 'app-website-new',
@@ -12,7 +13,6 @@ export class WebsiteNewComponent implements OnInit {
   @ViewChild('f') loginForm: NgForm;
 
   userId: String;
-  website = {};
   websites = [{}];
 
 
@@ -24,17 +24,21 @@ export class WebsiteNewComponent implements OnInit {
       this.userId = params['uid'];
 
     });
-    this.websites = this.websiteService.findWebsitesByUser(this.userId);
-    for (let x = 0; x < this.websites.length; x++) {
-      this.websites[x]['url'] = '/user/' + this.userId + '/website/' + this.websites[x]['_id'];
-    }
+    this.websiteService.findWebsitesByUser(this.userId).subscribe(
+      data => {
+        this.websites = data;
+      }
+    );
   }
 
   create() {
-    this.website['name'] = this.loginForm.value.name;
-    this.website['description'] = this.loginForm.value.description;
-
-    this.websiteService.createWebsite(this.userId, this.website);
+    const website = {name: this.loginForm.value.name, description: this.loginForm.value.description};
+    console.log(website);
+    this.websiteService.createWebsite(this.userId, website).subscribe(
+      data => {
+        console.log(data);
+      }
+    );
   }
 
 }

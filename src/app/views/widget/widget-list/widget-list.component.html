@@ -21,27 +21,26 @@
   </div>
 </nav>
 
+<div class="container cl-container-padding" appSortable (newIndexes)="reorderWidgets($event)">
+  <div *ngFor="let widget of widgets" >
+    <div [ngSwitch]="widget['widgetType']">
 
-<div class="container cl-container-padding" *ngFor="let widget of widgets">
-  <div [ngSwitch]="widget['widgetType']">
+      <div *ngSwitchCase="'HEADING'">
+        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget['_id']}}"><span class="fas fa-cog float-right"></span></a>
+        <h1 >"{{widget['text']}}"</h1>
+      </div>
 
-    <div *ngSwitchCase="'HEADING'">
-      <a routerLink="/{{widget['link']}}"><span class="fas fa-cog float-right"></span></a>
-      <h1 >"{{widget['text']}}"</h1>
+      <div *ngSwitchCase="'YOUTUBE'">
+        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget['_id']}}"><span class="fas fa-cog float-right"></span></a>
+        <iframe width="480" height="315" [src]="byPass(widget['url'])"></iframe>
+      </div>
+
+      <div *ngSwitchCase="'IMAGE'">
+        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget['_id']}}"><span class="fas fa-cog float-right"></span></a>
+        <img class="img-responsive img-rounded cl-widget-images" src="{{widget['url']}}">
+      </div>
     </div>
-
-    <div *ngSwitchCase="'YOUTUBE'">
-      <a routerLink="/{{widget['link']}}"><span class="fas fa-cog float-right"></span></a>
-      <iframe width="480" height="315" [src]="byPass(widget['url'])"></iframe>
-    </div>
-
-    <div *ngSwitchCase="'IMAGE'">
-      <a routerLink="/{{widget['link']}}"><span class="fas fa-cog float-right"></span></a>
-      <img class="img-responsive img-rounded cl-widget-images" src="{{widget['url']}}">
-    </div>
-
   </div>
-
 </div>
 
 
@@ -66,7 +65,5 @@
     </div>
   </div>
 </nav>
-
-
 
 </body>

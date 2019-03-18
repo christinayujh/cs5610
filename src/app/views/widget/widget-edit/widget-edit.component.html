@@ -22,22 +22,25 @@
   </div>
 </nav>
 
-<div [ngSwitch]="widget['widgetType']">
+<div class="container-fluid cl-container-padding">
+  <ul class="list-group cl-list-group-borderless">
+    <div [ngSwitch]="widget['widgetType']">
 
-  <div *ngSwitchCase="'HEADING'">
-    <app-widget-header></app-widget-header>
-  </div>
+      <div *ngSwitchCase="'HEADING'">
+        <app-widget-header></app-widget-header>
+      </div>
 
-  <div *ngSwitchCase="'YOUTUBE'">
-    <app-widget-youtube></app-widget-youtube>
-  </div>
+      <div *ngSwitchCase="'YOUTUBE'">
+        <app-widget-youtube></app-widget-youtube>
+      </div>
 
-  <div *ngSwitchCase="'IMAGE'">
-    <app-widget-image></app-widget-image>
-  </div>
+      <div *ngSwitchCase="'IMAGE'">
+        <app-widget-image></app-widget-image>
+      </div>
 
+    </div>
+  </ul>
 </div>
-
 
 <nav class="navbar navbar-light bg-light fixed-bottom">
   <div class="container-fluid row">

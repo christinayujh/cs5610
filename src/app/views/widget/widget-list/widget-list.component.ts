@@ -27,12 +27,26 @@ export class WidgetListComponent implements OnInit {
       this.userId = params['uid'];
       this.websiteId = params['wid'];
     });
-    this.widgets = this.widgetService.findWidgetsByPageId(this.pageId);
+
+
+    this.widgetService.findWidgetsByPageId(this.pageId).subscribe(
+      data => {
+        this.widgets = data;
+      }
+    );
     for (let x = 0; x < this.widgets.length; x++) {
       this.widgets[x]['link'] =
         '/user/' + this.userId + '/website/' + this.websiteId + '/page/' + this.pageId + '/widget/' + this.widgets[x]['_id'];
     }
     console.log(this.widgets);
+  }
+
+  reorderWidgets(indexes) {
+    // call widget service function to update widget as per index
+    this.widgetService.reorderWidgets(indexes.startIndex, indexes.endIndex, this.pageId)
+      .subscribe(
+        (data) => console.log(data)
+      );
   }
 
 }

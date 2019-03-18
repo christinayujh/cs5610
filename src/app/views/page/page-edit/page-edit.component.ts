@@ -1,27 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import {PageService} from '../../../services/page.service.client';
 import {ActivatedRoute} from '@angular/router';
+import {Page} from '../../../models/page.model.client';
 
-export class Page {
-  _id: String;
-  name: String;
-  websiteId: String;
-  description: String;
-
-  constructor(_id, name, websiteId, description) {
-    this._id = _id;
-    this.name = name;
-    this.websiteId = websiteId;
-    this.description = description;
-  }
-
-}
 
 @Component({
   selector: 'app-page-edit',
   templateUrl: './page-edit.component.html',
   styleUrls: ['./page-edit.component.css']
 })
+
 export class PageEditComponent implements OnInit {
 
   userId: String;
@@ -39,15 +27,24 @@ export class PageEditComponent implements OnInit {
       this.websiteId = params['wid'];
       this.pageId = params['pid'];
     });
-    this.page = this.pageService.findPageById(this.pageId);
+    this.pageService.findPageById(this.pageId).subscribe(
+      data => {
+        console.log(data);
+        this.page = data;
+      }
+    );
   }
 
   UpdatePage() {
-    this.pageService.updatePage(this.pageId, this.page);
+    this.pageService.updatePage(this.pageId, this.page).subscribe(
+      data => {
+        console.log(data);
+      }
+    );
   }
 
   delete() {
-    this.pageService.deletePage(this.pageId);
+    this.pageService.deletePage(this.pageId).subscribe();
   }
 
 }

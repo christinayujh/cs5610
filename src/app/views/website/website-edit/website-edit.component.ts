@@ -2,22 +2,8 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {WebsiteService} from '../../../services/website.service.client';
 import {ActivatedRoute} from '@angular/router';
+import {Website} from '../../../models/website.model.client';
 
-export class Website {
-  _id: String;
-  name: String;
-  developerId: String;
-  description: String;
-
-  constructor(_id, name, developerId, description) {
-    this._id = _id;
-    this.name = name;
-    this.developerId = developerId;
-    this.description = description;
-  }
-
-
-}
 
 @Component({
   selector: 'app-website-edit',
@@ -40,19 +26,28 @@ export class WebsiteEditComponent implements OnInit {
     this.activatedRoute.params.subscribe((params: any) => {
       this.userId = params['uid'];
       this.websiteId = params['wid'];
-      this.website = this.websiteService.findWebsiteById(params.wid);
+      this.websiteService.findWebsiteById(params.wid).subscribe(
+        data => {
+          this.website = data;
+        }
+      );
     });
-    this.websites = this.websiteService.findWebsitesByUser(this.userId);
-    for (let x = 0; x < this.websites.length; x++) {
-      this.websites[x]['url'] = '/user/' + this.userId + '/website/' + this.websites[x]['_id'];
-    }
+    this.websiteService.findWebsitesByUser(this.userId).subscribe(
+      data => {
+        this.websites = data;
+      }
+    );
   }
 
   UpdateWebsite() {
-    this.websiteService.updateWebsite(this.websiteId, this.website);
+    this.websiteService.updateWebsite(this.websiteId, this.website).subscribe(
+      data => {
+        console.log(data);
+      }
+    );
   }
 
   delete() {
-    this.websiteService.deleteWebsite(this.websiteId);
+    this.websiteService.deleteWebsite(this.websiteId).subscribe();
   }
 }
