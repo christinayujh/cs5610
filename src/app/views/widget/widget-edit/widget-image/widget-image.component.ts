@@ -38,4 +38,15 @@ export class WidgetImageComponent implements OnInit {
     console.log(this.widget);
   }
 
+  updateWidget() {
+    this.widgetService.updateWidget(this.widget._id, this.widget).subscribe(
+      data => {
+        this.widget = data;
+      }
+    );
+  }
+
+  deleteWidget() {
+    this.widgetService.deleteWidget(this.widget._id).subscribe();
+  }
 }
