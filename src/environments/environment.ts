@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'https://webdev-yu-jiahuan.herokuapp.com/'
+  baseUrl: 'https://webdev-yu-jiahuan.herokuapp.com'
 };
 
 /*
