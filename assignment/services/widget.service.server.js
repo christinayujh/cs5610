@@ -29,17 +29,15 @@ module.exports = function (app) {
   ];
 
   function createWidget(req, res) {
-    let widget = {};
-    widget.pageId = req.params.pageId;
-
-    widget.widgetType = req.body.widgetType;
-    widget.size = req.body.size;
-    widget.width = req.body.width;
-    widget.text = req.body.text;
-    widget.url = req.body.url;
+    let widget = req.body;
     widget._id = Math.round(Math.random() * 10000).toString();
+    console.log("create Widget");
+
+    console.log(widget);
+    console.log("created Widget");
+
     widgets.push(widget);
-    res.send({widget});
+    res.send(widget);
   }
 
   function findAllWidgetsForPage(req, res) {
@@ -114,29 +112,31 @@ module.exports = function (app) {
   }
 
   function uploadImage(req, res) {
-    var widgetId = req.body.widgetId;
-    var width = req.body.width;
-    var myFile = req.file;
     var userId = req.body.userId;
     var websiteId = req.body.websiteId;
     var pageId = req.body.pageId;
-    var originalname = myFile.originalname; // file name on user's computer
-    var filename = myFile.filename; // new file name in upload folder
-    var path = myFile.path; // full path of uploaded file
-    var destination = myFile.destination; // folder where file is saved to
-    var size = myFile.size;
-    var mimetype = myFile.mimetype;
+    var widgetId = req.body.widgetId;
+    var width = req.body.width;
+    var myFile = req.file;
 
-
-    for (var i in widgets){
-      if(widgets[i]._id === widgetId){
-        widgets[i].url = '/uploads/'+filename;
-        return;
-      }
+    if (myFile == null) {
+      res.sendStatus(404);
+      return;
     }
 
-    //stay on the page, do not redirect for this assignment
-    // var callbackUrl = "/assignment/#/user/"+userId+"/website/"+websiteId+...;
-    // res.redirect(callbackUrl);
+
+    var filename = myFile.filename;     // new file name in upload folder
+
+    var widget = {url: "uploads/" + filename};
+
+    var widget;
+    for (var i = 0; i < widgets.length; i++) {
+      if (widgets[i]._id === widgetId) {
+        widget = widgets[i];
+      }
+    }
+    widget.url = 'uploads/' + filename;
+
+    res.redirect("/");
   }
 }
