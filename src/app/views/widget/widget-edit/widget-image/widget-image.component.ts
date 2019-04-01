@@ -22,7 +22,6 @@ export class WidgetImageComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('dsdsadadasdadasdasda');
 
     this.activatedRoute.params.subscribe((params: any) => {
       this.pageId = params['pid'];

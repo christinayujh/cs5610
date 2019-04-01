@@ -1,6 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../../services/user.service.client';
 import {User} from '../../../models/user.model.client';
 
@@ -15,10 +15,10 @@ export class ProfileComponent implements OnInit {
   user: User;
   userId: string;
 
-  constructor(private router: ActivatedRoute, private userService: UserService) {}
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, private userService: UserService) {}
 
   ngOnInit() {
-    this.router.params.subscribe(params => {
+    this.activatedRoute.params.subscribe(params => {
       this.userId = params['uid'];
       this.userService.findUserById(this.userId).subscribe(
         data => {
@@ -31,6 +31,7 @@ export class ProfileComponent implements OnInit {
     this.userService.updateUser(this.user).subscribe(
       data => {
         console.log(data);
+        this.router.navigate(['/user/' + this.userId]);
       }
     );
   }
