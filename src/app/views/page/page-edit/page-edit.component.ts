@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {PageService} from '../../../services/page.service.client';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Page} from '../../../models/page.model.client';
 
 
@@ -9,7 +9,6 @@ import {Page} from '../../../models/page.model.client';
   templateUrl: './page-edit.component.html',
   styleUrls: ['./page-edit.component.css']
 })
-
 export class PageEditComponent implements OnInit {
 
   userId: String;
@@ -17,7 +16,7 @@ export class PageEditComponent implements OnInit {
   pageId: String;
   page: Page;
 
-  constructor(private pageService: PageService, private activatedRoute: ActivatedRoute) {
+  constructor(private pageService: PageService, private router: Router, private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -44,7 +43,11 @@ export class PageEditComponent implements OnInit {
   }
 
   delete() {
-    this.pageService.deletePage(this.pageId).subscribe();
+    this.pageService.deletePage(this.pageId).subscribe(
+      data => {
+        this.router.navigate(['/user/' + this.userId + '/website/' + this.websiteId + '/page']);
+      }
+    );
   }
 
 }

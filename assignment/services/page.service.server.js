@@ -86,7 +86,7 @@ module.exports = function (app) {
   function deletePage(req, res) {
     console.log("delete page");
     let pageId = req.params.pageId;
-    pageModel.updatePage(pageId).exec(
+    pageModel.deletePage(pageId).exec(
       function (err, page) {
         if (err) {
           return res.sendStatus(400).send(err);
