@@ -62,7 +62,6 @@ import { QuillEditorModule } from 'ngx-quill-editor';
     AppRoutingModule,
     HttpClientModule,
     QuillEditorModule
-
   ],
   providers: [UserService, WebsiteService, PageService, WidgetService, FlickrService],
   bootstrap: [AppComponent]

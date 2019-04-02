@@ -27,23 +27,26 @@ export class FlickrImageSearchComponent implements OnInit {
     this.activatedRoute.params
       .subscribe(
         (params: any) => {
-          this.websiteId = params['websiteId'];
-          this.pageId = params['pageId'];
-          this.widgetId = params['widgetId'];
+          this.userId = params['uid'];
+          this.websiteId = params['wid'];
+          this.pageId = params['pid'];
+          this.widgetId = params['wgid'];
         }
       );
   }
 
   searchPhotos() {
+    console.log('this.searchText');
     this.flickrService
       .searchPhotos(this.searchText)
       .subscribe(
         (data: any) => {
-          let val = data._body;
+          console.log(data);
+          let val = data;
           val = val.replace('jsonFlickrApi(', '');
           val = val.substring(0, val.length - 1);
           val = JSON.parse(val);
-          this.photos = val.photos;
+          this.photos = val.photos.photo;
         }
       );
   }
@@ -57,6 +60,7 @@ export class FlickrImageSearchComponent implements OnInit {
     const widget = {
       websiteId: this.websiteId,
       pageId: this.pageId,
+      widgetType: 'IMAGE',
       url: url
     };
 
