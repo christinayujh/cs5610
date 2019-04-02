@@ -3,7 +3,7 @@
   <div class="container-fluid row">
 
     <div class="navbar-text float-left">
-      <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}" class="cl-text-black cl-icon-padding">
+      <a routerLink="/user/{{userId}}/website/{{websiteId}}/page" class="cl-text-black cl-icon-padding">
           <span class="fas fa-chevron-left">
           </span>
       </a>
@@ -32,7 +32,7 @@
 
       <div *ngSwitchCase="'YOUTUBE'">
         <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget['_id']}}"><span class="fas fa-cog float-right"></span></a>
-        <iframe width="480" height="315" [src]="byPass(widget['url'])"></iframe>
+        <iframe width="560" height="315" [src]="widget.url | safe" frameborder="0" allowfullscreen></iframe>
       </div>
 
       <div *ngSwitchCase="'IMAGE'">

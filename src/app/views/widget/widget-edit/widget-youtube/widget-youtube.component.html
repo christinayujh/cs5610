@@ -1,21 +1,55 @@
+<nav class="navbar navbar-light bg-light fixed-top">
+  <div class="container-fluid row">
+
+    <div class="float-left">
+      <a routerLink="../" class="cl-text-black cl-icon-padding">
+          <span class="fas fa-chevron-left">
+          </span>
+      </a>
+      <a class="navbar-brand cl-text-white cl-text-bold" href="#">
+        Widgets Edit
+      </a>
+    </div>
+    <div class="navbar-text float-right">
+      <a (click)="updateWidget()" class="cl-icon-padding cl-text-black">
+          <span class="fas fa-check">
+          </span>
+      </a>
+    </div>
+
+  </div>
+</nav>
+
 <div class="container">
   <form>
     <div class="form-group">
-      <label for="name">Name</label>
-      <input [(ngModel)]="widget['name']" type="text" class="form-control" id="name" placeholder="{{widget['name']}}">
+      <label for="youtube-name">Name</label>
+      <input [(ngModel)]="widget.name" name="name" type="text" class="form-control" id="youtube-name" placeholder="Name">
     </div>
     <div class="form-group">
-      <label for="text">Text</label>
-      <input [(ngModel)]="widget['text']" type="text" class="form-control" id="text" placeholder="{{widget['text']}}">
+      <label for="youtube-text">Text</label>
+      <input [(ngModel)]="widget.text" name="text" type="text" class="form-control" id="youtube-text" placeholder="Text">
     </div>
     <div class="form-group">
-      <label for="url">URL</label>
-      <input [(ngModel)]="widget['url']" type="text" class="form-control" id="url" placeholder="{{widget['url']}}">
+      <label for="youtube-URL">URL</label>
+      <input [(ngModel)]="widget.url" name="url" type="text" class="form-control" id="youtube-URL" placeholder="URL">
     </div>
     <div class="form-group">
-      <label for="width">Size</label>
-      <input [(ngModel)]="widget['width']" type="width" class="form-control" id="size" placeholder="{{widget['width']}}">
+      <label for="youtube-width">Width</label>
+      <input [(ngModel)]="widget.width" name="width" type="text" class="form-control" id="youtube-width" placeholder="100%">
     </div>
   </form>
-  <a class="btn btn-danger  btn-block" routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget">Delete</a>
+  <a class="btn btn-danger btn-block" (click)="deleteWidget()">Delete</a>
 </div>
+
+<nav class="navbar navbar-light bg-light fixed-bottom">
+  <div class="container-fluid row">
+    <div class="float-right">
+
+      <a routerLink="/user/{{userId}}" class="cl-icon-padding">
+        <span class="fas fa-user"></span>
+      </a>
+
+    </div>
+  </div>
+</nav>

@@ -239,7 +239,8 @@ var AppModule = /** @class */ (function () {
                 _views_widget_widget_edit_widget_header_widget_header_component__WEBPACK_IMPORTED_MODULE_17__["WidgetHeaderComponent"],
                 _views_widget_widget_edit_widget_image_widget_image_component__WEBPACK_IMPORTED_MODULE_18__["WidgetImageComponent"],
                 _views_widget_widget_edit_widget_youtube_widget_youtube_component__WEBPACK_IMPORTED_MODULE_19__["WidgetYoutubeComponent"],
-                _views_widget_widget_edit_widget_image_flickr_image_search_flickr_image_search_component__WEBPACK_IMPORTED_MODULE_26__["FlickrImageSearchComponent"]
+                _views_widget_widget_edit_widget_image_flickr_image_search_flickr_image_search_component__WEBPACK_IMPORTED_MODULE_26__["FlickrImageSearchComponent"],
+                _views_widget_widget_list_widget_list_component__WEBPACK_IMPORTED_MODULE_16__["SafePipeComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
@@ -277,15 +278,11 @@ __webpack_require__.r(__webpack_exports__);
 var FlickrService = /** @class */ (function () {
     function FlickrService(_http) {
         this._http = _http;
-        this.key = '007d3ca946cbdd2230f55d22a5c0b3e2';
-        this.secret = '9eb168009b8b9e79';
-        this.urlBase = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&format=json&api_key=API_KEY&text=TEXT';
+        this.urlBase = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&format=json&api_key=007d3ca946cbdd2230f55d22a5c0b3e2&text=';
     }
     FlickrService.prototype.searchPhotos = function (searchTerm) {
-        var url = this.urlBase
-            .replace('API_KEY', this.key)
-            .replace('TEXT', searchTerm);
-        return this._http.get(url);
+        var url = this.urlBase + searchTerm;
+        return this._http.get(url, { responseType: 'text' });
     };
     FlickrService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])() // needed as we're injecting Http service into this service
@@ -1484,7 +1481,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--Header-->\n<nav class=\"navbar navbar-light bg-light fixed-top\">\n  <div class=\"container-fluid\">\n    <!--Left arrow-->\n    <p class=\"navbar-text float-left\">\n      <a [routerLink]=\"['/user', userId, 'website', websiteId, 'page', pageId, 'widget', widgetId]\" class=\"navbar-link\">\n        <span class=\"fas fa-chevron-left\"></span>\n      </a>\n    </p>\n    <span>\n        <!--heading on the nav bar-->\n        <p class=\"navbar-header float-left\">\n            <a class=\"navbar-brand thick\">\n                <b>Search Flickr</b>\n            </a>\n        </p>\n        </span>\n  </div>\n</nav>\n\n<!--!!Material on the page!!-->\n<div class = \"container\">\n  <div class=\"input-group\">\n    <input [(ngModel)]=\"searchText\" type=\"text\" class=\"form-control\">\n    <span class=\"input-group-btn\">\n            <a (click)=\"searchPhotos()\" class=\"btn btn-default\" type=\"button\">\n                <span class=\"fas fa-search\"></span>\n            </a>\n        </span>\n  </div>\n\n  <div class=\"row\">\n    <!--<div *ngFor = \"let pic of photos['photo']\"-->\n    <div *ngFor = \"let pic of photos\"\n         class=\"col-xs-4\">\n      <img    (click)=\"selectPhoto(pic)\"\n              width=\"100%\"\n              [src] = \"['https://farm' + pic.farm + '.staticflickr.com/' + pic.server + '/' + pic.id + '_' + pic.secret + '_s.jpg']\"/>\n\n      <!--[src] = \"https://farm\" + photo.farm + \".staticflickr.com/\" + photo.server + \"/\" + photo.id + \"_\" + photo.secret + \"_\" + \"s.jpg\"/>-->\n      <p></p>\n    </div>\n  </div>\n\n</div>\n<!-- Footer -->\n\n<nav class=\"navbar navbar-light bg-light fixed-bottom\">\n  <div class=\"container-fluid\">\n    <!--Play Symbol-->\n    <!--User Symbol-->\n    <p class=\"navbar-text float-right\">\n      <a [routerLink]=\"['/profile']\">\n        <span class=\"fas fa-user\"></span>\n      </a>\n    </p>\n\n  </div>\n</nav>\n"
+module.exports = "<!--Header-->\n<nav class=\"navbar navbar-light bg-light fixed-top\">\n  <div class=\"container-fluid row\">\n    <!--Left arrow-->\n    <div class=\"navbar-text float-left\">\n      <a [routerLink]=\"['/user', userId, 'website', websiteId, 'page', pageId, 'widget']\" class=\"navbar-link\">\n        <span class=\"fas fa-chevron-left\"></span>\n      </a>\n    </div>\n    <span>\n        <!--heading on the nav bar-->\n        <div>\n            <a class=\"navbar-brand thick\">\n                <b>Search Flickr</b>\n            </a>\n        </div>\n    </span>\n  </div>\n</nav>\n\n<!--!!Material on the page!!-->\n<div class = \"container\">\n  <div class=\"input-group\">\n    <input [(ngModel)]=\"searchText\" type=\"text\" class=\"form-control\">\n    <span class=\"input-group-btn\">\n            <a (click)=\"searchPhotos()\" class=\"btn btn-default\" type=\"button\">\n                <span class=\"fas fa-search\"></span>\n            </a>\n        </span>\n  </div>\n\n  <div class=\"row\">\n    <!--<div *ngFor = \"let pic of photos['photo']\"-->\n    <div *ngFor = \"let pic of photos\"\n         class=\"col-xs-4\">\n      <img    (click)=\"selectPhoto(pic)\"\n              width=\"100%\"\n              [src] = \"['https://farm' + pic.farm + '.staticflickr.com/' + pic.server + '/' + pic.id + '_' + pic.secret + '_s.jpg']\"/>\n\n      <!--[src] = \"https://farm\" + photo.farm + \".staticflickr.com/\" + photo.server + \"/\" + photo.id + \"_\" + photo.secret + \"_\" + \"s.jpg\"/>-->\n      <p></p>\n    </div>\n  </div>\n\n</div>\n<!-- Footer -->\n\n<nav class=\"navbar navbar-light bg-light fixed-bottom\">\n  <div class=\"container-fluid row\">\n    <!--Play Symbol-->\n    <!--User Symbol-->\n    <div class=\"float-right\">\n      <a routerLink=\"/user/{{userId}}\">\n        <span class=\"fas fa-user\"></span>\n      </a>\n    </div>\n\n  </div>\n</nav>\n"
 
 /***/ }),
 
@@ -1520,21 +1517,24 @@ var FlickrImageSearchComponent = /** @class */ (function () {
         // fetch userId, pageId and websiteId from url
         this.activatedRoute.params
             .subscribe(function (params) {
-            _this.websiteId = params['websiteId'];
-            _this.pageId = params['pageId'];
-            _this.widgetId = params['widgetId'];
+            _this.userId = params['uid'];
+            _this.websiteId = params['wid'];
+            _this.pageId = params['pid'];
+            _this.widgetId = params['wgid'];
         });
     };
     FlickrImageSearchComponent.prototype.searchPhotos = function () {
         var _this = this;
+        console.log('this.searchText');
         this.flickrService
             .searchPhotos(this.searchText)
             .subscribe(function (data) {
-            var val = data._body;
+            console.log(data);
+            var val = data;
             val = val.replace('jsonFlickrApi(', '');
             val = val.substring(0, val.length - 1);
             val = JSON.parse(val);
-            _this.photos = val.photos;
+            _this.photos = val.photos.photo;
         });
     };
     FlickrImageSearchComponent.prototype.selectPhoto = function (photo) {
@@ -1545,6 +1545,7 @@ var FlickrImageSearchComponent = /** @class */ (function () {
         var widget = {
             websiteId: this.websiteId,
             pageId: this.pageId,
+            widgetType: 'IMAGE',
             url: url
         };
         this.widgetService
@@ -1594,7 +1595,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-light bg-light fixed-top\">\n  <div class=\"container-fluid row\">\n\n    <div class=\"float-left\">\n      <a routerLink=\"../\" class=\"cl-text-black cl-icon-padding\">\n          <span class=\"fas fa-chevron-left\">\n          </span>\n      </a>\n      <a class=\"navbar-brand cl-text-white cl-text-bold\" href=\"#\">\n        Widgets Edit\n      </a>\n    </div>\n    <div class=\"navbar-text float-right\">\n      <a (click)=\"updateWidget()\" class=\"cl-icon-padding cl-text-black\">\n          <span class=\"fas fa-check\">\n          </span>\n      </a>\n    </div>\n\n  </div>\n</nav>\n\n<div class=\"container\">\n  <form>\n    <div class=\"form-group\">\n      <label for=\"image-name\">Name</label>\n      <input [(ngModel)]=\"widget['name']\" name=\"name\" type=\"text\" class=\"form-control\" id=\"image-name\" placeholder=\"Name\">\n    </div>\n    <div class=\"form-group\">\n      <label for=\"image-text\">Text</label>\n      <input [(ngModel)]=\"widget['text']\" name=\"text\" type=\"text\" class=\"form-control\" id=\"image-text\" placeholder=\"Text\">\n    </div>\n    <div class=\"form-group\">\n      <label for=\"image-URL\">URL</label>\n      <input [(ngModel)]=\"widget['url']\" name=\"url\" type=\"text\" class=\"form-control\" id=\"image-URL\" placeholder=\"URL\">\n    </div>\n    <div class=\"form-group\">\n      <label for=\"image-width\">Width</label>\n      <input [(ngModel)]=\"widget['width']\" name=\"width\" type=\"text\" class=\"form-control\" id=\"image-width\"\n             placeholder=\"100%\">\n    </div>\n  </form>\n  <form ngNoForm action=\"{{baseUrl}}/api/upload\" method=\"post\" enctype=\"multipart/form-data\">\n    <input name=\"myFile\" type=\"file\" class=\"form-control\"/>\n    <input name=\"widgetId\" value=\"{{widget._id}}\" style=\"display: none\"/>\n    <input name=\"websiteId\" value=\"{{websiteId}}\" style=\"display: none\"/>\n    <input name=\"pageId\" value=\"{{pageId}}\" style=\"display: none\"/>\n    <input name=\"userId\" value=\"{{userId}}\" style=\"display: none\"/>\n    <button type=\"submit\" class=\"btn btn-block btn-primary\">Upload Image</button>\n  </form>\n  <a class=\"btn btn-primary btn-block \"\n     [routerLink]=\"['/user/'+userId+'/website/'+websiteId+'/page/'+pageId+'/widget/'+widget._id+'/flickr']\" >Choose From Flickr</a>\n  <a class=\"btn btn-danger  btn-block\" (click)=\"deleteWidget()\">Delete</a>\n</div>\n\n<nav class=\"navbar navbar-light bg-light fixed-bottom\">\n  <div class=\"container-fluid row\">\n    <div class=\"float-right\">\n\n      <a routerLink=\"/user/{{userId}}\" class=\"cl-icon-padding\">\n        <span class=\"fas fa-user\"></span>\n      </a>\n\n    </div>\n  </div>\n</nav>\n"
+module.exports = "<nav class=\"navbar navbar-light bg-light fixed-top\">\n  <div class=\"container-fluid row\">\n\n    <div class=\"float-left\">\n      <a routerLink=\"../\" class=\"cl-text-black cl-icon-padding\">\n          <span class=\"fas fa-chevron-left\">\n          </span>\n      </a>\n      <a class=\"navbar-brand cl-text-white cl-text-bold\" href=\"#\">\n        Widgets Edit\n      </a>\n    </div>\n    <div class=\"navbar-text float-right\">\n      <a (click)=\"updateWidget()\" class=\"cl-icon-padding cl-text-black\">\n          <span class=\"fas fa-check\">\n          </span>\n      </a>\n    </div>\n\n  </div>\n</nav>\n\n<div class=\"container\">\n  <form>\n    <div class=\"form-group\">\n      <label for=\"image-name\">Name</label>\n      <input [(ngModel)]=\"widget['name']\" name=\"name\" type=\"text\" class=\"form-control\" id=\"image-name\" placeholder=\"Name\">\n    </div>\n    <div class=\"form-group\">\n      <label for=\"image-text\">Text</label>\n      <input [(ngModel)]=\"widget['text']\" name=\"text\" type=\"text\" class=\"form-control\" id=\"image-text\" placeholder=\"Text\">\n    </div>\n    <div class=\"form-group\">\n      <label for=\"image-URL\">URL</label>\n      <input [(ngModel)]=\"widget['url']\" name=\"url\" type=\"text\" class=\"form-control\" id=\"image-URL\" placeholder=\"URL\">\n    </div>\n    <div class=\"form-group\">\n      <label for=\"image-width\">Width</label>\n      <input [(ngModel)]=\"widget['width']\" name=\"width\" type=\"text\" class=\"form-control\" id=\"image-width\"\n             placeholder=\"100%\">\n    </div>\n  </form>\n  <form ngNoForm action=\"{{baseUrl}}/api/upload\" method=\"post\" enctype=\"multipart/form-data\">\n    <input name=\"myFile\" type=\"file\" class=\"form-control\"/>\n    <input name=\"widgetId\" value=\"{{widget._id}}\" style=\"display: none\"/>\n    <input name=\"websiteId\" value=\"{{websiteId}}\" style=\"display: none\"/>\n    <input name=\"pageId\" value=\"{{pageId}}\" style=\"display: none\"/>\n    <input name=\"userId\" value=\"{{userId}}\" style=\"display: none\"/>\n    <button type=\"submit\" class=\"btn btn-block btn-primary\">Upload Image</button>\n  </form>\n  <a class=\"btn btn-primary btn-block \" [routerLink]=\"['/user/'+userId+'/website/'+websiteId+'/page/'+pageId+'/widget/'+widget._id+'/flickr']\" >Choose From Flickr</a>\n  <a class=\"btn btn-danger  btn-block\" (click)=\"deleteWidget()\">Delete</a>\n</div>\n\n<nav class=\"navbar navbar-light bg-light fixed-bottom\">\n  <div class=\"container-fluid row\">\n    <div class=\"float-right\">\n\n      <a routerLink=\"/user/{{userId}}\" class=\"cl-icon-padding\">\n        <span class=\"fas fa-user\"></span>\n      </a>\n\n    </div>\n  </div>\n</nav>\n"
 
 /***/ }),
 
@@ -1642,6 +1643,7 @@ var WidgetImageComponent = /** @class */ (function () {
         var _this = this;
         this.widgetService.updateWidget(this.widget._id, this.widget).subscribe(function (data) {
             _this.widget = data;
+            _this.router.navigate(['/user/' + _this.userId + '/website/' + _this.websiteId + '/page/' + _this.pageId + '/widget/']);
         });
     };
     WidgetImageComponent.prototype.deleteWidget = function () {
@@ -1680,7 +1682,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <form>\n    <div class=\"form-group\">\n      <label for=\"name\">Name</label>\n      <input [(ngModel)]=\"widget['name']\" type=\"text\" class=\"form-control\" id=\"name\" placeholder=\"{{widget['name']}}\">\n    </div>\n    <div class=\"form-group\">\n      <label for=\"text\">Text</label>\n      <input [(ngModel)]=\"widget['text']\" type=\"text\" class=\"form-control\" id=\"text\" placeholder=\"{{widget['text']}}\">\n    </div>\n    <div class=\"form-group\">\n      <label for=\"url\">URL</label>\n      <input [(ngModel)]=\"widget['url']\" type=\"text\" class=\"form-control\" id=\"url\" placeholder=\"{{widget['url']}}\">\n    </div>\n    <div class=\"form-group\">\n      <label for=\"width\">Size</label>\n      <input [(ngModel)]=\"widget['width']\" type=\"width\" class=\"form-control\" id=\"size\" placeholder=\"{{widget['width']}}\">\n    </div>\n  </form>\n  <a class=\"btn btn-danger  btn-block\" routerLink=\"/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget\">Delete</a>\n</div>\n"
+module.exports = "<nav class=\"navbar navbar-light bg-light fixed-top\">\n  <div class=\"container-fluid row\">\n\n    <div class=\"float-left\">\n      <a routerLink=\"../\" class=\"cl-text-black cl-icon-padding\">\n          <span class=\"fas fa-chevron-left\">\n          </span>\n      </a>\n      <a class=\"navbar-brand cl-text-white cl-text-bold\" href=\"#\">\n        Widgets Edit\n      </a>\n    </div>\n    <div class=\"navbar-text float-right\">\n      <a (click)=\"updateWidget()\" class=\"cl-icon-padding cl-text-black\">\n          <span class=\"fas fa-check\">\n          </span>\n      </a>\n    </div>\n\n  </div>\n</nav>\n\n<div class=\"container\">\n  <form>\n    <div class=\"form-group\">\n      <label for=\"youtube-name\">Name</label>\n      <input [(ngModel)]=\"widget.name\" name=\"name\" type=\"text\" class=\"form-control\" id=\"youtube-name\" placeholder=\"Name\">\n    </div>\n    <div class=\"form-group\">\n      <label for=\"youtube-text\">Text</label>\n      <input [(ngModel)]=\"widget.text\" name=\"text\" type=\"text\" class=\"form-control\" id=\"youtube-text\" placeholder=\"Text\">\n    </div>\n    <div class=\"form-group\">\n      <label for=\"youtube-URL\">URL</label>\n      <input [(ngModel)]=\"widget.url\" name=\"url\" type=\"text\" class=\"form-control\" id=\"youtube-URL\" placeholder=\"URL\">\n    </div>\n    <div class=\"form-group\">\n      <label for=\"youtube-width\">Width</label>\n      <input [(ngModel)]=\"widget.width\" name=\"width\" type=\"text\" class=\"form-control\" id=\"youtube-width\" placeholder=\"100%\">\n    </div>\n  </form>\n  <a class=\"btn btn-danger btn-block\" (click)=\"deleteWidget()\">Delete</a>\n</div>\n\n<nav class=\"navbar navbar-light bg-light fixed-bottom\">\n  <div class=\"container-fluid row\">\n    <div class=\"float-right\">\n\n      <a routerLink=\"/user/{{userId}}\" class=\"cl-icon-padding\">\n        <span class=\"fas fa-user\"></span>\n      </a>\n\n    </div>\n  </div>\n</nav>\n"
 
 /***/ }),
 
@@ -1698,13 +1700,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_widget_service_client__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../services/widget.service.client */ "./src/app/services/widget.service.client.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+
 
 
 
 
 var WidgetYoutubeComponent = /** @class */ (function () {
-    function WidgetYoutubeComponent(widgetService, activatedRoute) {
+    function WidgetYoutubeComponent(widgetService, router, activatedRoute) {
         this.widgetService = widgetService;
+        this.router = router;
         this.activatedRoute = activatedRoute;
     }
     WidgetYoutubeComponent.prototype.ngOnInit = function () {
@@ -1720,13 +1725,26 @@ var WidgetYoutubeComponent = /** @class */ (function () {
         });
         console.log(this.widget);
     };
+    WidgetYoutubeComponent.prototype.updateWidget = function () {
+        this.widgetService.updateWidget(this.widget._id, this.widget).subscribe();
+    };
+    WidgetYoutubeComponent.prototype.deleteWidget = function () {
+        var _this = this;
+        this.widgetService.deleteWidget(this.widget._id).subscribe(function (widget) {
+            _this.router.navigate(['/user/' + _this.userId + '/website/' + _this.websiteId + '/page/' + _this.pageId + '/widget']);
+        });
+    };
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('f'),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["NgForm"])
+    ], WidgetYoutubeComponent.prototype, "loginForm", void 0);
     WidgetYoutubeComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-widget-youtube',
             template: __webpack_require__(/*! ./widget-youtube.component.html */ "./src/app/views/widget/widget-edit/widget-youtube/widget-youtube.component.html"),
             styles: [__webpack_require__(/*! ./widget-youtube.component.css */ "./src/app/views/widget/widget-edit/widget-youtube/widget-youtube.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_widget_service_client__WEBPACK_IMPORTED_MODULE_2__["WidgetService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_widget_service_client__WEBPACK_IMPORTED_MODULE_2__["WidgetService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"]])
     ], WidgetYoutubeComponent);
     return WidgetYoutubeComponent;
 }());
@@ -1753,7 +1771,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<body>\n<nav class=\"navbar navbar-light bg-light fixed-top\">\n  <div class=\"container-fluid row\">\n\n    <div class=\"navbar-text float-left\">\n      <a routerLink=\"/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}\" class=\"cl-text-black cl-icon-padding\">\n          <span class=\"fas fa-chevron-left\">\n          </span>\n      </a>\n      <a class=\"navbar-brand cl-text-white cl-text-bold\" href=\"#\">\n        Widgets\n      </a>\n    </div>\n    <div class=\"navbar-text float-right\">\n      <a routerLink=\"/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/new\" class=\"cl-icon-padding cl-text-black\">\n          <span class=\"fas fa-plus\">\n          </span>\n      </a>\n    </div>\n\n  </div>\n</nav>\n\n<div class=\"container cl-container-padding\" appSortable (newIndexes)=\"reorderWidgets($event)\">\n  <div *ngFor=\"let widget of widgets\" >\n    <div [ngSwitch]=\"widget['widgetType']\">\n\n      <div *ngSwitchCase=\"'HEADING'\">\n        <a routerLink=\"/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget['_id']}}\"><span class=\"fas fa-cog float-right\"></span></a>\n        <h1 >\"{{widget['text']}}\"</h1>\n      </div>\n\n      <div *ngSwitchCase=\"'YOUTUBE'\">\n        <a routerLink=\"/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget['_id']}}\"><span class=\"fas fa-cog float-right\"></span></a>\n        <iframe width=\"480\" height=\"315\" [src]=\"byPass(widget['url'])\"></iframe>\n      </div>\n\n      <div *ngSwitchCase=\"'IMAGE'\">\n        <a routerLink=\"/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget['_id']}}\"><span class=\"fas fa-cog float-right\"></span></a>\n        <img class=\"img-responsive img-rounded cl-widget-images\" src=\"{{widget['url']}}\">\n      </div>\n    </div>\n  </div>\n</div>\n\n\n<nav class=\"navbar navbar-light bg-light fixed-bottom\">\n  <div class=\"container-fluid row\">\n    <div class=\"float-right\">\n\n      <a routerLink=\"/user/{{userId}}\" class=\"cl-icon-padding\">\n        <span class=\"fas fa-user\"></span>\n      </a>\n\n    </div>\n\n    <div class=\"float-left\">\n      <a href=\"#\" class=\"cl-icon-padding\">\n        <span class=\"fas fa-eye-open\"></span>\n      </a>\n      <a href=\"#\" class=\"cl-icon-padding\">\n        <span class=\"fas fa-play\"></span>\n      </a>\n\n    </div>\n  </div>\n</nav>\n\n</body>\n"
+module.exports = "<body>\n<nav class=\"navbar navbar-light bg-light fixed-top\">\n  <div class=\"container-fluid row\">\n\n    <div class=\"navbar-text float-left\">\n      <a routerLink=\"/user/{{userId}}/website/{{websiteId}}/page\" class=\"cl-text-black cl-icon-padding\">\n          <span class=\"fas fa-chevron-left\">\n          </span>\n      </a>\n      <a class=\"navbar-brand cl-text-white cl-text-bold\" href=\"#\">\n        Widgets\n      </a>\n    </div>\n    <div class=\"navbar-text float-right\">\n      <a routerLink=\"/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/new\" class=\"cl-icon-padding cl-text-black\">\n          <span class=\"fas fa-plus\">\n          </span>\n      </a>\n    </div>\n\n  </div>\n</nav>\n\n<div class=\"container cl-container-padding\" appSortable (newIndexes)=\"reorderWidgets($event)\">\n  <div *ngFor=\"let widget of widgets\" >\n    <div [ngSwitch]=\"widget['widgetType']\">\n\n      <div *ngSwitchCase=\"'HEADING'\">\n        <a routerLink=\"/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget['_id']}}\"><span class=\"fas fa-cog float-right\"></span></a>\n        <h1 >\"{{widget['text']}}\"</h1>\n      </div>\n\n      <div *ngSwitchCase=\"'YOUTUBE'\">\n        <a routerLink=\"/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget['_id']}}\"><span class=\"fas fa-cog float-right\"></span></a>\n        <iframe width=\"560\" height=\"315\" [src]=\"widget.url | safe\" frameborder=\"0\" allowfullscreen></iframe>\n      </div>\n\n      <div *ngSwitchCase=\"'IMAGE'\">\n        <a routerLink=\"/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget['_id']}}\"><span class=\"fas fa-cog float-right\"></span></a>\n        <img class=\"img-responsive img-rounded cl-widget-images\" src=\"{{widget['url']}}\">\n      </div>\n    </div>\n  </div>\n</div>\n\n\n<nav class=\"navbar navbar-light bg-light fixed-bottom\">\n  <div class=\"container-fluid row\">\n    <div class=\"float-right\">\n\n      <a routerLink=\"/user/{{userId}}\" class=\"cl-icon-padding\">\n        <span class=\"fas fa-user\"></span>\n      </a>\n\n    </div>\n\n    <div class=\"float-left\">\n      <a href=\"#\" class=\"cl-icon-padding\">\n        <span class=\"fas fa-eye-open\"></span>\n      </a>\n      <a href=\"#\" class=\"cl-icon-padding\">\n        <span class=\"fas fa-play\"></span>\n      </a>\n\n    </div>\n  </div>\n</nav>\n\n</body>\n"
 
 /***/ }),
 
@@ -1761,11 +1779,12 @@ module.exports = "<body>\n<nav class=\"navbar navbar-light bg-light fixed-top\">
 /*!*******************************************************************!*\
   !*** ./src/app/views/widget/widget-list/widget-list.component.ts ***!
   \*******************************************************************/
-/*! exports provided: WidgetListComponent */
+/*! exports provided: SafePipeComponent, WidgetListComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SafePipeComponent", function() { return SafePipeComponent; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WidgetListComponent", function() { return WidgetListComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
@@ -1776,6 +1795,25 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+var SafePipeComponent = /** @class */ (function () {
+    function SafePipeComponent(sanitizer) {
+        this.sanitizer = sanitizer;
+    }
+    SafePipeComponent.prototype.transform = function (url) {
+        // splitting input url on '='
+        // the result is two elements in the output array
+        var parts = url.split('=');
+        var id = parts[1];
+        url = 'https://www.youtube.com/embed/' + id;
+        return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+    };
+    SafePipeComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Pipe"])({ name: 'safe' }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_4__["DomSanitizer"]])
+    ], SafePipeComponent);
+    return SafePipeComponent;
+}());
 
 var WidgetListComponent = /** @class */ (function () {
     function WidgetListComponent(widgetService, activatedRoute, sanitizer) {
@@ -1838,8 +1876,8 @@ __webpack_require__.r(__webpack_exports__);
 // The list of file replacements can be found in `angular.json`.
 var environment = {
     production: false,
-    // baseUrl: 'https://webdev-yu-jiahuan.herokuapp.com'
-    baseUrl: 'http://localhost:3200'
+    baseUrl: 'https://webdev-yu-jiahuan.herokuapp.com'
+    // baseUrl: 'http://localhost:3200'
 };
 /*
  * For easier debugging in development mode, you can import the following file
