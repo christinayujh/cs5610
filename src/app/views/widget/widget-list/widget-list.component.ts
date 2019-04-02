@@ -1,7 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Pipe, PipeTransform, Component, OnInit } from '@angular/core';
 import {WidgetService} from '../../../services/widget.service.client';
 import {ActivatedRoute} from '@angular/router';
 import {DomSanitizer} from '@angular/platform-browser';
+
+
+
+
+@Pipe({ name: 'safe' })
+export class SafePipeComponent implements PipeTransform {
+  constructor(private sanitizer: DomSanitizer) {}
+  transform(url) {
+
+    // splitting input url on '='
+    // the result is two elements in the output array
+    const parts = url.split('=');
+    const id = parts[1];
+    url = 'https://www.youtube.com/embed/' + id;
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
+}
 
 @Component({
   selector: 'app-widget-list',

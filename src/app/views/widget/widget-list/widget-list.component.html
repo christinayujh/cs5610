@@ -24,20 +24,42 @@
 <div class="container cl-container-padding" appSortable (newIndexes)="reorderWidgets($event)">
   <div *ngFor="let widget of widgets" >
     <div [ngSwitch]="widget['widgetType']">
+      <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget['_id']}}"><span class="fas fa-cog float-right"></span></a>
 
       <div *ngSwitchCase="'HEADING'">
         <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget['_id']}}"><span class="fas fa-cog float-right"></span></a>
-        <h1 >"{{widget['text']}}"</h1>
+        <div [ngSwitch]="widget['size']">
+          <h1 *ngSwitchCase="1">{{widget['text']}}</h1>
+          <h2 *ngSwitchCase="2">{{widget['text']}}</h2>
+          <h3 *ngSwitchCase="3">{{widget['text']}}</h3>
+          <h4 *ngSwitchCase="4">{{widget['text']}}</h4>
+          <h5 *ngSwitchCase="5">{{widget['text']}}</h5>
+          <h6 *ngSwitchCase="6">{{widget['text']}}</h6>
+        </div>
       </div>
 
-      <div *ngSwitchCase="'YOUTUBE'">
-        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget['_id']}}"><span class="fas fa-cog float-right"></span></a>
-        <iframe width="480" height="315" [src]="byPass(widget['url'])"></iframe>
+      <div *ngSwitchCase="'YOUTUBE'" class="youtube-widget" style="width: 90%">
+        <iframe width="560" height="315" [src]="widget.url | safe" frameborder="0" allowfullscreen></iframe>
       </div>
 
       <div *ngSwitchCase="'IMAGE'">
-        <a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget['_id']}}"><span class="fas fa-cog float-right"></span></a>
+        <!--<a routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget['_id']}}"><span class="fas fa-cog float-right"></span></a>-->
         <img class="img-responsive img-rounded cl-widget-images" src="{{widget['url']}}">
+      </div>
+
+
+      <div *ngSwitchCase="'HTML'" [innerHTML]="widget.text"></div>
+
+      <div *ngSwitchCase="'TEXT'">
+        <div *ngIf="widget.formatted">
+          <quill-editor [(ngModel)]="widget.text" name="text"></quill-editor>
+        </div>
+        <input *ngIf="!widget.formatted && (!widget.rows || widget.rows===1)" placeholder="{{widget.placeholder}}"
+               class="form-control"/>
+        <textarea *ngIf="!widget.formatted && (widget.rows > 1)" rows="{{widget.rows}}"
+                  placeholder="{{widget.placeholder}}"
+                  class="form-control">{{widget.text}}
+        </textarea>
       </div>
     </div>
   </div>

@@ -1,0 +1,55 @@
+<nav class="navbar navbar-light bg-light fixed-top">
+  <div class="container-fluid row">
+
+    <div class="navbar-text float-left">
+      <a routerLink="../" class="cl-text-black cl-icon-padding">
+          <span class="fas fa-chevron-left">
+          </span>
+      </a>
+      <a class="navbar-brand cl-text-white cl-text-bold">
+        Widgets Edit
+      </a>
+    </div>
+    <div class="float-right">
+      <a (click)="updateWidget()" class="cl-icon-padding cl-text-black">
+          <span class="fas fa-check">
+          </span>
+      </a>
+    </div>
+
+  </div>
+</nav>
+
+<div class="container">
+  <input [(ngModel)]="widget.text" class="form-control"/>
+  <input [(ngModel)]="widget.rows" class="form-control" type="number"/>
+  <label for="Name">Name</label>
+  <div>
+    <input [(ngModel)]="widget.name" type="text" class="form-control" id="Name" name="name" placeholder="Name">
+  </div>
+
+  <input [(ngModel)]="widget.placeholder" class="form-control" required/>
+
+  <p></p>
+
+  <div class="input-group">
+    <input type="text" readonly value="Formatted" class="form-control"/>
+    <span class="input-group-addon">
+    <input [(ngModel)]="widget.formatted" type="checkbox"/>
+  </span>
+  </div>
+  <a class="btn btn-danger  btn-block" (click)="deleteWidget()">Delete</a>
+</div>
+
+<nav class="navbar navbar-light bg-light fixed-bottom">
+  <div class="container-fluid row">
+    <div class="float-right">
+
+      <a routerLink="/user/{{userId}}" class="cl-icon-padding">
+        <span class="fas fa-user"></span>
+      </a>
+
+    </div>
+  </div>
+</nav>
+

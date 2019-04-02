@@ -46,6 +46,16 @@ server.listen( port , () => console.log('Running on port 3200'));
 //require('./assignment/app')(app);
 //require('./helloworld')(app);
 
+var connectionString = 'mongodb://jiahuanyu123:jiahuanyu123@ds049854.mlab.com:49854/heroku_2s3m3vn6';
+var mongoose = require("mongoose");
+mongoose.Promise = global.Promise;
+const client = mongoose.connect( connectionString, { useNewUrlParser: true });
+
+//Get the default connection
+var db = mongoose.connection;
+//Bind connection to error event (to get notification of connection errors)
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
 require("./assignment/app")(app);
 
 

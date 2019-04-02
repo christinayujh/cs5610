@@ -15,7 +15,7 @@ import {WebsiteEditComponent} from './views/website/website-edit/website-edit.co
 import {WebsiteListComponent} from './views/website/website-list/website-list.component';
 import {WidgetChooserComponent} from './views/widget/widget-chooser/widget-chooser.component';
 import {WidgetEditComponent} from './views/widget/widget-edit/widget-edit.component';
-import {WidgetListComponent} from './views/widget/widget-list/widget-list.component';
+import {WidgetListComponent, SafePipeComponent} from './views/widget/widget-list/widget-list.component';
 import {WidgetHeaderComponent} from './views/widget/widget-edit/widget-header/widget-header.component';
 import {WidgetImageComponent} from './views/widget/widget-edit/widget-image/widget-image.component';
 import {WidgetYoutubeComponent} from './views/widget/widget-edit/widget-youtube/widget-youtube.component';
@@ -29,7 +29,9 @@ import { WidgetService } from './services/widget.service.client';
 import { FlickrImageSearchComponent } from './views/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component';
 import {FlickrService} from './services/flickr.service';
 import {SortableDirective} from '../../assignment/directives/sortable.directive';
-
+import { WidgetHtmlComponent } from './views/widget/widget-edit/widget-html/widget-html.component';
+import { WidgetTextComponent } from './views/widget/widget-edit/widget-text/widget-text.component';
+import { QuillEditorModule } from 'ngx-quill-editor';
 
 @NgModule({
   declarations: [
@@ -49,13 +51,18 @@ import {SortableDirective} from '../../assignment/directives/sortable.directive'
     WidgetHeaderComponent,
     WidgetImageComponent,
     WidgetYoutubeComponent,
-    FlickrImageSearchComponent
+    SafePipeComponent,
+    FlickrImageSearchComponent,
+    WidgetHtmlComponent,
+    WidgetTextComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
+    QuillEditorModule
+
   ],
   providers: [UserService, WebsiteService, PageService, WidgetService, FlickrService],
   bootstrap: [AppComponent]

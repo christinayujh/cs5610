@@ -1,0 +1,40 @@
+
+<nav class="navbar navbar-light bg-light fixed-top">
+  <div class="container-fluid row">
+
+    <div class="navbar-text float-left">
+      <a routerLink="../" class="cl-text-black cl-icon-padding">
+          <span class="fas fa-chevron-left">
+          </span>
+      </a>
+      <a class="navbar-brand cl-text-white cl-text-bold">
+        Widgets Edit
+      </a>
+    </div>
+    <div class="float-right">
+      <a (click)="updateWidget()" class="cl-icon-padding cl-text-black">
+          <span class="fas fa-check">
+          </span>
+      </a>
+    </div>
+
+  </div>
+</nav>
+
+<div class="container">
+  <quill-editor [(ngModel)]="widget.text" name="text"></quill-editor>
+  <a class="btn btn-danger  btn-block" (click)="deleteWidget()">Delete</a>
+</div>
+
+<nav class="navbar navbar-light bg-light fixed-bottom">
+  <div class="container-fluid row">
+    <div class="float-right">
+
+      <a routerLink="/user/{{userId}}" class="cl-icon-padding">
+        <span class="fas fa-user"></span>
+      </a>
+
+    </div>
+  </div>
+</nav>
+
