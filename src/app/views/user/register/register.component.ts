@@ -25,13 +25,11 @@ export class RegisterComponent implements OnInit {
     const username = this.loginForm.value.username;
     const password = this.loginForm.value.password;
 
-    this.user = {username: username, password: password};
-
-    this.userService.createUser(this.user).subscribe((user: any) => {
-      this.router.navigate(['/login']);
-    }, (error: any) => {
-      this.error = error._body;
-    });
+    this.userService.register(username, password).subscribe((user: any) => {
+        this.router.navigate(['/user', user._id]);
+      }, (error: any) => {
+        this.error = error._body;
+      });
   }
 
   ngOnInit() {

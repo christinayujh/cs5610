@@ -2,15 +2,15 @@ import {Injectable} from '@angular/core';
 import {User} from '../models/user.model.client';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
-
+import {SharedService} from './shared.service';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class UserService {
-  constructor(private _http: HttpClient) {
+  constructor(private _http: HttpClient, private sharedService: SharedService, private router: Router) {
   }
 
   baseUrl = environment.baseUrl;
-
 
   createUser(user: any) {
     return this._http.post<User>(this.baseUrl + '/api/user/', user);
@@ -38,6 +38,32 @@ export class UserService {
   }
 
   login(username: String, password: String) {
+    const body = { username : username, password : password };
+    console.log('11111111111');
 
+    return this._http.post(this.baseUrl + '/api/login', body, {withCredentials: true});
+  }
+
+  logout() {
+    return this._http.post(this.baseUrl + '/api/logout', '', {withCredentials: true});
+  }
+
+  register(username: String, password: String) {
+    const user = {username: username, password: password};
+    return this._http.post(this.baseUrl + '/api/register', user, {withCredentials: true});
+  }
+
+  loggedIn() {
+    return this._http.get(this.baseUrl + '/api/loggedin', {withCredentials: true});
+    // .subscribe((res: any) => {
+    //   const user = res;
+    //   if (user !== '0') {
+    //     this.sharedService.user = user;
+    //     return true;
+    //   } else {
+    //     this.router.navigate(['/login']);
+    //     return false;
+    //   }
+    // });
   }
 }

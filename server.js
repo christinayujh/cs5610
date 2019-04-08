@@ -1,17 +1,25 @@
-// Get the dependencies
-
 const express = require('express');
 const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
 const app = express();
-
-app.use(bodyParser.urlencoded({ extended: true }));
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+app.use(cookieParser());
+app.use(session({secret: 'process.env.SESSION_SECRET'}));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
+var passport = require('passport');
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Point static path to dist -- For building -- REMOVE
 app.use(express.static(path.join(__dirname, 'dist/my-project')));
-
+app.use(cookieParser());
+app.use(session({secret: process.env.SESSION_SECRET}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 // CORS
 app.use(function(req, res, next) {

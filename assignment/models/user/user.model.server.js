@@ -15,6 +15,13 @@ userModel.deleteAllUser = deleteAllUser;
 
 module.exports = userModel;
 
+var api = {
+  findUserByFacebookId: findUserByFacebookId,
+};
+
+function findUserByFacebookId(facebookId) {
+  return User.findOne({'facebook.id': facebookId});
+}
 
 function createUser(user) {
   console.log("model"+user);
@@ -40,7 +47,6 @@ function updateUser(userId,user) {
 function deleteUser(userId){
   return userModel.findByIdAndRemove(userId);
 }
-
 
 function deleteAllUser() {
   return userModel.deleteMany({ });

@@ -32,6 +32,8 @@ import {SortableDirective} from '../../assignment/directives/sortable.directive'
 import { WidgetHtmlComponent } from './views/widget/widget-edit/widget-html/widget-html.component';
 import { WidgetTextComponent } from './views/widget/widget-edit/widget-text/widget-text.component';
 import { QuillEditorModule } from 'ngx-quill-editor';
+import { AuthGuard } from './services/auth-guard.service';
+import { SharedService } from './services/shared.service';
 
 @NgModule({
   declarations: [
@@ -63,7 +65,7 @@ import { QuillEditorModule } from 'ngx-quill-editor';
     HttpClientModule,
     QuillEditorModule
   ],
-  providers: [UserService, WebsiteService, PageService, WidgetService, FlickrService],
+  providers: [UserService, WebsiteService, PageService, WidgetService, FlickrService, SharedService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -31,8 +31,9 @@ const appRoutes: Routes = [
   {path: 'user/:uid/website/:wid/page/:pid/widget/:wgid/flickr', component: FlickrImageSearchComponent},
 ];
 
-@NgModule({
-  imports: [RouterModule.forRoot(appRoutes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }
+
+// @NgModule({
+//  imports: [RouterModule.forRoot(appRoutes)], exports: [RouterModule]
+// })
+
+export const AppRoutingModule = RouterModule.forRoot(appRoutes, {useHash: true});
