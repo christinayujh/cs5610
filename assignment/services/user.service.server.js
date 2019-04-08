@@ -41,8 +41,8 @@ module.exports = function (app) {
   }
 
   var facebookConfig = {
-    clientID: '822114281477385',
-    clientSecret: '81ee4e2c03af9260923eda61c3025f01',
+    clientID: '319338745418552',
+    clientSecret: '2fb56014cefce9f694c957050c2fbb32',
     callbackURL: '/auth/facebook/callback'
   };
 
